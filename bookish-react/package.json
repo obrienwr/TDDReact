@@ -8,13 +8,15 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "e2e": "cypress run"
+    "e2e": "cypress run",
+    "stub-server": "node ./stub-server/server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
+    "axios": "^1.7.5",
     "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18"
