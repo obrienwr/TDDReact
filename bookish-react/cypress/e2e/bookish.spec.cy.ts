@@ -52,7 +52,7 @@ describe('Bookish application', () => {
       .contains('View Details')
       .eq(bookIndex)
       .click();
-    cy.url().should('include', `/book/${books[bookIndex].id}`);
+    cy.url().should('include', `/books/${books[bookIndex].id}`);
     cy.get('h2.book-title').contains(books[bookIndex].name);
   });
 
