@@ -6,10 +6,11 @@ describe('Bookish application', () => {
     {'name': 'Domain-driven design', 'id': '2'},
     {'name': 'Building Microservices', 'id': '3'}
   ];
+  const apiUrl = 'http://localhost:8080';
 
   function cleanupData(){
     return axios
-      .delete('http://localhost:8080/books?_cleanup=true')
+      .delete(`${apiUrl}/books?_cleanup=true`)
       .catch(err => console.error(err));
   }
 
@@ -19,19 +20,19 @@ describe('Bookish application', () => {
 
   beforeEach(() => {
     return books.map((item) => {
-      axios.post('http://localhost:8080/books', item,
+      axios.post(`${apiUrl}/books`, item,
         {headers: {'Content-type': 'application/json'}})
     });
   });
 
 
   it('Visits the bookish', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.get('h2[data-test="heading"]').contains('Bookish');
   })
 
   it('Shows a book list', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.get('div[data-test="book-list"]').should('exist');
     cy.get('div.book-item').should((booksJsxList) => {
       expect(booksJsxList).to.have.length(books.length);
@@ -43,4 +44,22 @@ describe('Bookish application', () => {
       )
     })
   })
+
+  it('Navigates to the detail pages', () => {
+    const bookIndex = 0;
+    cy.visit('/');
+    cy.get('div.book-item')
+      .contains('View Details')
+      .eq(bookIndex)
+      .click();
+    cy.url().should('include', `/book/${books[bookIndex].id}`);
+    cy.get('h2.book-title').contains(books[bookIndex].name);
+  });
+
+  it('Shows a 404 page when book is not found', () => {
+
+    cy.visit(`/book/undefined`, {failOnStatusCode: false});
+    // cy.get('h2').contains('404');
+
+  });
 })

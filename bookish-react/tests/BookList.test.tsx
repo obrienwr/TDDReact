@@ -5,7 +5,7 @@ import {describe, expect, test} from '@jest/globals';
 import BookList from "@/app/ui/components/BookList";
 
 describe('BookList', () => {
-  it('renders books', async () => {
+  it('renders book', async () => {
     const props = {
       books: [
         {name: 'Refactoring', 'id': '1'},

@@ -2,7 +2,8 @@
 
 import {useEffect, useState} from 'react';
 import {Book} from "@/app/lib/types";
-import axios from "axios";
+import {fetchBooks} from "@/app/lib/data";
+import {NotFoundError} from "rxjs";
 
 export default function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -10,20 +11,21 @@ export default function useBooks() {
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    async function fetchBooks() {
+    async function fetchBooksWithLoadingAndError() {
       setError(false);
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:8080/books');
-        setBooks(response.data);
+        const booksResponse = await fetchBooks();
+        setBooks(booksResponse);
       } catch (e) {
         setError(true);
+        throw e;
       } finally {
         setLoading(false);
       }
     }
 
-    fetchBooks();
+    fetchBooksWithLoadingAndError();
   }, []);
 
   return {books, loading, error};
