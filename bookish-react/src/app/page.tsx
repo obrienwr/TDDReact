@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography"
 
-import BookListContainer from "@/app/ui/components/BookListContainer"
+import BookListContainer from "@/app/ui/components/BookList/BookListContainer"
 
 export default function Home() {
 

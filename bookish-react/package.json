@@ -9,7 +9,8 @@
     "lint": "next lint",
     "test": "jest",
     "e2e": "cypress run",
-    "stub-server": "node ./stub-server/server.js"
+    "stub-server": "node ./stub-server/server.js",
+    "e2e-head": "cypress open"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
