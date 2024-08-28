@@ -1,5 +1,47 @@
 import axios from "axios";
 
+describe('Bookish application', () => {
+  before(cleanupData);
+  afterEach(cleanupData);
+  beforeEach(() => {
+    // Post each book to the server
+    populateData(books, 'books');
+  });
+
+
+  it('Visits the bookish', () => {
+    visitSite();
+    checkAppTitleIs('Bookish');
+  })
+
+  it('Shows a books list', () => {
+    visitSite();
+    checkBookListExists();
+    checkTitlesMatchExpectation();
+  })
+
+  it('Navigates to the detail page of each book', () => {
+    for (let i = 0; i < books.length; i++) {
+      checkNavigateToDetailPage(i);
+    }
+  });
+
+  it('Searches for a book by title', () => {
+    const bookIndex = 1;
+    visitSite();
+    checkBookListHasLength(books.length);
+    typeIntoSearch(books[bookIndex].name);
+    checkBookListHasLength(1);
+    checkFirstBookInListMatchesBookIndex(bookIndex);
+  });
+
+})
+
+
+//////////////////////////
+// Implementation Logic //
+//////////////////////////
+
 const defaultBookDescription = 'Descriptive description about the book.';
 const books = [
   {name: 'Refactoring', id: '1', description: defaultBookDescription},
@@ -48,6 +90,12 @@ function checkTitlesMatchExpectation() {
   })
 }
 
+function checkFirstBookInListMatchesBookIndex(index: number) {
+  cy.get('div.book-item')
+    .eq(0)
+    .should('contain', books[index].name)
+}
+
 function checkNavigateToDetailPage(bookIndex: number) {
   visitSite();
   cy.get('div.book-item')
@@ -64,39 +112,3 @@ function checkBookListHasLength(length: number) {
   cy.get('div.book-item').should('have.length', length);
 }
 
-describe('Bookish application', () => {
-  before(cleanupData);
-  afterEach(cleanupData);
-  beforeEach(() => {
-    // Post each book to the server
-    populateData(books, 'books');
-  });
-
-
-  it('Visits the bookish', () => {
-    visitSite();
-    checkAppTitleIs('Bookish');
-  })
-
-  it('Shows a books list', () => {
-    visitSite();
-    checkBookListExists();
-    checkTitlesMatchExpectation();
-  })
-
-  it('Navigates to the detail page of each book', () => {
-    for (let i = 0; i < books.length; i++) {
-      checkNavigateToDetailPage(i);
-    }
-  });
-
-  it('Searches for a book by title', () => {
-    const bookIndex = 1;
-    visitSite();
-    checkBookListHasLength(books.length);
-    typeIntoSearch(books[bookIndex].name);
-    checkBookListHasLength(1);
-    cy.get('div.book-item').eq(0).contains(books[1].name);
-  });
-
-})
