@@ -7,7 +7,7 @@ export default function BookList({books}: {books: Book[]}) {
       {books.map(book => (
         <div className="book-item" key={book.id}>
           <h2 className="title">{book.name}</h2>
-          <Link href={`/book/${book.id}`}>View Details</Link>
+          <Link href={`/books/${book.id}`}>View Details</Link>
         </div>
       ))}
     </div>

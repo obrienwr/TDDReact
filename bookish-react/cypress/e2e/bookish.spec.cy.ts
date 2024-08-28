@@ -31,7 +31,7 @@ describe('Bookish application', () => {
     cy.get('h2[data-test="heading"]').contains('Bookish');
   })
 
-  it('Shows a book list', () => {
+  it('Shows a books list', () => {
     cy.visit('/');
     cy.get('div[data-test="book-list"]').should('exist');
     cy.get('div.book-item').should((booksJsxList) => {

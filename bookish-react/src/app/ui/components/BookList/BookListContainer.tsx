@@ -1,6 +1,6 @@
 "use client";
 
-import BookList from "@/app/ui/components/BookList";
+import BookList from "@/app/ui/components/BookList/BookList";
 import useBooks from "@/app/lib/hooks/useBooks";
 
 export default function BookListContainer() {
