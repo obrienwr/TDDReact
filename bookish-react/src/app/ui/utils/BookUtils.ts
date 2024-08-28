@@ -1,16 +1,16 @@
 import {Book} from "@/app/lib/types";
 
-export const MAX_DESCRIPTION_LENGTH = 200;
+export const MAX_DESCRIPTION_LENGTH_CHARACTERS = 200;
 
 export function descriptionNeedsTruncation(description: string): boolean {
-  return description.length > MAX_DESCRIPTION_LENGTH;
+  return description.length > MAX_DESCRIPTION_LENGTH_CHARACTERS;
 }
 
 export function getUIFriendlyBookDescription(book: Book | undefined, expanded: boolean): string {
   let UIFriendlyBookDescription = "";
   if (book?.description) {
     if (!expanded && descriptionNeedsTruncation(book.description)) {
-      UIFriendlyBookDescription = `${book.description.slice(0, MAX_DESCRIPTION_LENGTH)}...`;
+      UIFriendlyBookDescription = `${book.description.slice(0, MAX_DESCRIPTION_LENGTH_CHARACTERS)}...`;
     } else {
       UIFriendlyBookDescription = book.description;
     }

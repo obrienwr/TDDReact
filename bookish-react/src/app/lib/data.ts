@@ -5,8 +5,8 @@ import axios from "axios";
 
 const API_URL = 'http://localhost:8080';
 
-export async function fetchBooks(): Promise<Book[]> {
-  const response = await axios.get(`${API_URL}/books`);
+export async function fetchBooks(searchTerm: string): Promise<Book[]> {
+  const response = await axios.get(`${API_URL}/books?q=${searchTerm}&_sort=id`);
   return response.data
 }
 
