@@ -13,8 +13,8 @@ export default function useBook(id: string) {
         const book = await fetchBookById(id);
         setBook(book);
       } catch (e) {
-        console.log(`Catching error in useBook: ${e}`);
         setError(true);
+        throw e;
       } finally {
         setLoading(false);
       }

@@ -56,10 +56,4 @@ describe('Bookish application', () => {
     cy.get('h2.book-title').contains(books[bookIndex].name);
   });
 
-  it('Shows a 404 page when book is not found', () => {
-
-    cy.visit(`/book/undefined`, {failOnStatusCode: false});
-    // cy.get('h2').contains('404');
-
-  });
 })

@@ -19,7 +19,6 @@ export default function useBooks() {
         setBooks(booksResponse);
       } catch (e) {
         setError(true);
-        throw e;
       } finally {
         setLoading(false);
       }
