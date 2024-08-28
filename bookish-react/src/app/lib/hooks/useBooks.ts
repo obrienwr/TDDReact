@@ -9,13 +9,14 @@ export default function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const [term, setTerm] = useState<string>("");
 
   useEffect(() => {
     async function fetchBooksWithLoadingAndError() {
       setError(false);
       setLoading(true);
       try {
-        const booksResponse = await fetchBooks();
+        const booksResponse = await fetchBooks(term);
         setBooks(booksResponse);
       } catch (e) {
         setError(true);
@@ -25,7 +26,7 @@ export default function useBooks() {
     }
 
     fetchBooksWithLoadingAndError();
-  }, []);
+  }, [term]);
 
-  return {books, loading, error};
+  return {books, loading, error, term, setTerm};
 }

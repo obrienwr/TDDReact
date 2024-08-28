@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import {describe, expect, test} from '@jest/globals';
 
 import BookDetail from "@/app/ui/components/BookDetail/BookDetail";
-import {MAX_DESCRIPTION_LENGTH} from "@/app/ui/utils/BookUtils";
+import {MAX_DESCRIPTION_LENGTH_CHARACTERS} from "@/app/ui/utils/BookUtils";
 
 describe('BookDetail', () => {
 
@@ -12,7 +12,7 @@ describe('BookDetail', () => {
     id: '1',
     description: "The gayest of the robots in disguise."
   };
-  const longDescription = "a".repeat(MAX_DESCRIPTION_LENGTH + 1);
+  const longDescription = "a".repeat(MAX_DESCRIPTION_LENGTH_CHARACTERS + 1);
   const bookWithLongDescription = {
     ...book,
     description: longDescription
@@ -53,7 +53,7 @@ describe('BookDetail', () => {
     // BookUtils contains the MAX_DESCRIPTION_LENGTH constant
     render(<BookDetail book={bookWithLongDescription} />);
     const description = screen.getByTestId('book-description');
-    expect(description.innerHTML).toEqual(`${longDescription.slice(0, MAX_DESCRIPTION_LENGTH)}...`);
+    expect(description.innerHTML).toEqual(`${longDescription.slice(0, MAX_DESCRIPTION_LENGTH_CHARACTERS)}...`);
     const showMoreButton = screen.getByTestId('description-expansion');
     expect(showMoreButton).toBeInTheDocument();
   });
