@@ -36,13 +36,25 @@ server.post('/books/:id/reviews', (req, res) => {
     }
 });
 
-server.delete('books/:id/reviews', (req,res) => {
+server.delete('/books/:id/reviews', (req,res) => {
     const {id} = req.params;
     const book = router.db.get('books').find({id: parseInt(id)}).value();
     book.reviews = [];
     router.db.write();
     res.status(204).json({message: 'Reviews deleted'});
 })
+
+server.put('/books/:id/reviews/:reviewId', (req,res) => {
+    const {id, reviewId} = req.params;
+    const {content} = req.body;
+    const book = router.db.get('books').find({id: parseInt(id)}).value();
+    if (!book) { res.status(404).json({error: 'Book not found'}); return; }
+    const review = book.reviews.find(r => r.id === parseInt(reviewId));
+    if (!review) { res.status(404).json({error: 'Review not found'}); return; }
+    review.content = content;
+    router.db.write();
+    res.status(200).json(review);
+});
 
 server.use(middlewares);
 server.use(router);

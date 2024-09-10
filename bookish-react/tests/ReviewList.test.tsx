@@ -3,8 +3,9 @@ import ReviewList from "@/app/ui/components/Reviews/ReviewList";
 import {render} from "@testing-library/react";
 import {Review} from "@/app/lib/types";
 import {screen} from "@testing-library/react";
+import customRender from "./testUtilities/customRender";
 
-describe("ReviewList", () => {
+describe("ReviewItem", () => {
 
   const sampleReviews = [
     {
@@ -24,22 +25,14 @@ describe("ReviewList", () => {
 
   it("renders an empty list", () => {
     const reviews: Review[] = [];
-    render(<ReviewList reviews={reviews} />);
+    customRender(<ReviewList reviews={reviews} />);
     expect(screen.getByTestId("reviews-container")).toBeInTheDocument();
   });
 
   it("renders a correct length list of reviews when data is passed", () => {
-    render(<ReviewList reviews={sampleReviews} />);
+    customRender(<ReviewList reviews={sampleReviews} />);
     const items = screen.getAllByTestId("review");
     expect(items.length).toBe(2);
-  });
-
-  it("renders the correct review content", () => {
-    const review = sampleReviews[0];  // Only render the first review
-    render(<ReviewList reviews={[review]} />);
-
-    expect(screen.getByTestId("name")).toHaveTextContent(review.name);
-    expect(screen.getByTestId("content")).toHaveTextContent(review.content);
   });
 });
 

@@ -31,3 +31,9 @@ export type AddReviewRequest = {
   name: string;
   content: string;
 }
+
+export type UpdateReviewRequest = {
+  bookId: string;
+  reviewId: number;
+  content: string;
+}
