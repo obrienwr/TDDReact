@@ -2,7 +2,6 @@ import {BookDetailType} from "@/app/lib/types";
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchBookDetails} from "@/app/lib/slices/bookDetails/thunks";
 
-
 const initialState: BookDetailType = {
   book: {
     id: "0",

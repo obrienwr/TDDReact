@@ -27,7 +27,7 @@ export type BookDetailType = {
 }
 
 export type AddReviewRequest = {
-  id: string;
+  bookId: string;
   name: string;
   content: string;
 }

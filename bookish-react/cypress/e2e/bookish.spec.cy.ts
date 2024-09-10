@@ -1,8 +1,13 @@
 import axios from "axios";
 
 describe('Bookish application', () => {
-  before(cleanupData);
-  afterEach(cleanupData);
+  before(() => {
+    cleanupData();
+  });
+  afterEach(() => {
+    cleanupData();
+    // cy.request('DELETE', `${apiUrl}/books/1/reviews`);
+  });
   beforeEach(() => {
     // Post each book to the server
     populateData(books, 'books');
@@ -35,14 +40,20 @@ describe('Bookish application', () => {
     checkFirstBookInListMatchesBookAtIndex(bookIndex);
   });
 
+  const sampleReview = {name: 'Juntao Qiu', content: 'Excellent work!'};
+
   it('Allows for adding reviews to a book', () => {
     visitSite();
     gotoNthBookDetailInTheList(0);
-    cy.get('input[name="name"]').type('Juntao Qiu');
-    cy.get('textarea[name="content"]').type('Excellent work!');
-    cy.get('button[name="submit"]').click();
+    composeAndSubmitBookReview(sampleReview.name, sampleReview.content);
+    checkReviewsExist(1);
+  });
 
-    cy.get('div[data-test="reviews-container"] .review').should('have.length', 1);
+  it('Renders Correct Book Review Information', () => {
+    visitSite();
+    gotoNthBookDetailInTheList(0);
+    composeAndSubmitBookReview(sampleReview.name, sampleReview.content);
+    checkReviewNameAndContent(sampleReview.name, sampleReview.content, 1);
   });
 })
 
@@ -128,3 +139,18 @@ function checkBookListHasLength(length: number) {
   cy.get('div.book-item').should('have.length', length);
 }
 
+function composeAndSubmitBookReview(name: string, content: string) {
+  cy.get('input[name="name"]').type(name);
+  cy.get('input[name="content"]').type(content);
+  cy.get('button[name="submit"]').click();
+}
+
+function checkReviewsExist(numReviews: number) {
+  cy.get('div[data-testid="reviews-container"]').should('exist');
+  cy.get('div[data-testid="review"]').should('have.length', numReviews);
+}
+
+function checkReviewNameAndContent(name: string, content: string, index: number) {
+  cy.get('div[data-testid="review"]').eq(index).should('contain', name);
+  cy.get('div[data-testid="review"]').eq(index).should('contain', content);
+}

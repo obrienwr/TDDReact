@@ -33,5 +33,13 @@ describe("ReviewList", () => {
     const items = screen.getAllByTestId("review");
     expect(items.length).toBe(2);
   });
+
+  it("renders the correct review content", () => {
+    const review = sampleReviews[0];  // Only render the first review
+    render(<ReviewList reviews={[review]} />);
+
+    expect(screen.getByTestId("name")).toHaveTextContent(review.name);
+    expect(screen.getByTestId("content")).toHaveTextContent(review.content);
+  });
 });
 

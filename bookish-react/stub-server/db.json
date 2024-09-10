@@ -3,7 +3,135 @@
     {
       "name": "Grandmasters of Demonic Cultivation",
       "id": 1,
-      "description": "Wei WuXian doesn't realize Lan WangJi is in love with him until he does."
+      "description": "Wei WuXian doesn't realize Lan WangJi is in love with him until he does.",
+      "reviews": [
+        {
+          "id": 1,
+          "bookId": 1,
+          "name": "huh",
+          "content": "woah"
+        },
+        {
+          "id": 2,
+          "bookId": 1,
+          "name": "wow",
+          "content": "ee"
+        },
+        {
+          "id": 3,
+          "bookId": 1,
+          "name": "woah",
+          "content": "huh"
+        },
+        {
+          "id": 4,
+          "bookId": 1,
+          "name": "what",
+          "content": "huh"
+        },
+        {
+          "id": 5,
+          "bookId": 1,
+          "name": "what",
+          "content": "huh"
+        },
+        {
+          "id": 6,
+          "bookId": 1,
+          "name": "why",
+          "content": "doesnt"
+        },
+        {
+          "id": 7,
+          "bookId": 1,
+          "name": "this",
+          "content": "work"
+        },
+        {
+          "id": 8,
+          "bookId": 1,
+          "name": "eighth",
+          "content": "review"
+        },
+        {
+          "id": 9,
+          "bookId": 1,
+          "name": "ninth",
+          "content": "review"
+        },
+        {
+          "id": 10,
+          "bookId": 1,
+          "name": "tenth",
+          "content": "review"
+        },
+        {
+          "id": 11,
+          "bookId": 1,
+          "name": "ee",
+          "content": "wow"
+        },
+        {
+          "id": 12,
+          "bookId": 1,
+          "name": "ee",
+          "content": "wow"
+        },
+        {
+          "id": 13,
+          "bookId": 1,
+          "name": "race",
+          "content": "condition?"
+        },
+        {
+          "id": 14,
+          "bookId": 1,
+          "name": "proba",
+          "content": "bly"
+        },
+        {
+          "id": 15,
+          "bookId": 1,
+          "name": "maybe",
+          "content": "not"
+        },
+        {
+          "id": 16,
+          "bookId": 1,
+          "name": "maybe",
+          "content": "not"
+        },
+        {
+          "id": 17,
+          "bookId": 1,
+          "name": "maybe",
+          "content": "not"
+        },
+        {
+          "id": 18,
+          "bookId": 1,
+          "name": "wow",
+          "content": ":("
+        },
+        {
+          "id": 19,
+          "bookId": 1,
+          "name": "wow",
+          "content": ":("
+        },
+        {
+          "id": 20,
+          "bookId": 1,
+          "name": "lol",
+          "content": "lmao"
+        },
+        {
+          "id": 21,
+          "bookId": 1,
+          "name": "lol",
+          "content": "lmao2"
+        }
+      ]
     },
     {
       "name": "Transformers: More than Meets the Eye Volume 1",

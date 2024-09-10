@@ -81,7 +81,6 @@ describe('BookDetail', () => {
     customRender(<BookDetail book={bookWithReview} />);
     const reviews = screen.getAllByTestId("review");
     expect(reviews.length).toBe(bookWithReview.reviews.length);
-    expect(reviews[0].innerHTML).toEqual(bookWithReview.reviews[0].content);
   });
 
   it("renders a review form", () => {

@@ -4,10 +4,10 @@ import axios from "axios";
 
 export const addReview = createAsyncThunk<Review, AddReviewRequest>(
   "reviews/addReview",
-  async ({id, name, content}: AddReviewRequest) => {
+  async ({bookId, name, content}: AddReviewRequest) => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/books/${id}/reviews`,
+        `http://localhost:8080/books/${bookId}/reviews`,
         {name, content}
       );
       return response.data;

@@ -9,7 +9,9 @@ import {fetchBookDetails} from "@/app/lib/slices/bookDetails/thunks";
 
 export default function BookDetailContainer({bookId}: { bookId: string }) {
   const {book} = useSelector((state: RootState) => ({
-    book: state.detail.book
+    id: bookId,
+    name: state.detail.book.name,
+    book: state.detail.book,
   }));
 
   const dispatch = useDispatch<AppDispatch>();

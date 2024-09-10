@@ -1,11 +1,11 @@
 import {Review} from "@/app/lib/types";
-import ReviewCard from "@/app/ui/components/Reviews/ReviewCard";
+import ReviewItem from "@/app/ui/components/Reviews/ReviewItem";
 
 
 export default function ReviewList({reviews}: {reviews: Review[]}){
   return (
     <div data-testid={"reviews-container"}>
-      {reviews.map(review => <ReviewCard review={review} key={review.id} />)}
+      {reviews.map(review => <ReviewItem review={review} key={review.id} />)}
     </div>
   );
 }
