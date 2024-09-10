@@ -32,9 +32,18 @@ describe('Bookish application', () => {
     checkBookListHasLength(books.length);
     typeIntoSearch(books[bookIndex].name);
     checkBookListHasLength(1);
-    checkFirstBookInListMatchesBookIndex(bookIndex);
+    checkFirstBookInListMatchesBookAtIndex(bookIndex);
   });
 
+  it('Allows for adding reviews to a book', () => {
+    visitSite();
+    gotoNthBookDetailInTheList(0);
+    cy.get('input[name="name"]').type('Juntao Qiu');
+    cy.get('textarea[name="content"]').type('Excellent work!');
+    cy.get('button[name="submit"]').click();
+
+    cy.get('div[data-test="reviews-container"] .review').should('have.length', 1);
+  });
 })
 
 
@@ -90,7 +99,14 @@ function checkTitlesMatchExpectation() {
   })
 }
 
-function checkFirstBookInListMatchesBookIndex(index: number) {
+function gotoNthBookDetailInTheList(n: number) {
+  cy.get('div.book-item')
+    .eq(n)
+    .contains('View Details')
+    .click();
+}
+
+function checkFirstBookInListMatchesBookAtIndex(index: number) {
   cy.get('div.book-item')
     .eq(0)
     .should('contain', books[index].name)

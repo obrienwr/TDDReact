@@ -1,10 +1,11 @@
 import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import {screen} from "@testing-library/react";
 import {describe, expect, test} from '@jest/globals';
 
 import BookList from "@/app/ui/components/BookList/BookList";
 import {Book} from "@/app/lib/types";
 import {sample} from "rxjs";
+import customRender from "./testUtilities/customRender";
 
 describe('BookList', () => {
   const books: Book[] = [
@@ -13,7 +14,7 @@ describe('BookList', () => {
   ]
 
   beforeEach(() => {
-    render(<BookList books={books} />);
+    customRender(<BookList books={books} />);
   })
 
   it('renders books', async () => {

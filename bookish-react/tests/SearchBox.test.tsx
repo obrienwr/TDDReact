@@ -1,7 +1,8 @@
-import {render, screen, fireEvent} from "@testing-library/react";
+import {screen, fireEvent} from "@testing-library/react";
 import {describe, expect, jest} from '@jest/globals';
 import SearchBox from "@/app/ui/components/SearchBox";
 import {act} from "react";
+import {customRenderMock} from "./testUtilities/customRender";
 
 describe('SearchBox', () => {
   it("Renders input", () => {
@@ -9,7 +10,7 @@ describe('SearchBox', () => {
       term: "",
       onSearch: jest.fn()
     };
-    render(<SearchBox {...props} />);
+    customRenderMock(<SearchBox {...props} />);
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
   });
@@ -20,7 +21,7 @@ describe('SearchBox', () => {
       term: "",
       onSearch: jest.fn()
     };
-    render(<SearchBox {...props} />);
+    customRenderMock(<SearchBox {...props} />);
     const input = screen.getByRole('textbox');
     act(() => {
       fireEvent.change(input, {target: {value: searchBoxValue}});
@@ -33,7 +34,7 @@ describe('SearchBox', () => {
       term: "",
       onSearch: jest.fn()
     };
-    render(<SearchBox {...props} />);
+    customRenderMock(<SearchBox {...props} />);
     const input = screen.getByRole('textbox');
     fireEvent.change(input, {target: {value: " "}});
     expect(props.onSearch).not.toHaveBeenCalled();

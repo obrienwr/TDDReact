@@ -7,7 +7,7 @@ export default function BookList({books}: { books: Book[] }) {
     <div data-test="book-list">
       <Grid container spacing={3}>
         {books.map(book => (
-          <BookCard book={book} />
+          <BookCard book={book} key={book.id}/>
         ))}
       </Grid>
     </div>

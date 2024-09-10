@@ -1,3 +1,33 @@
 {
-  "books": []
+  "books": [
+    {
+      "name": "Grandmasters of Demonic Cultivation",
+      "id": 1,
+      "description": "Wei WuXian doesn't realize Lan WangJi is in love with him until he does."
+    },
+    {
+      "name": "Transformers: More than Meets the Eye Volume 1",
+      "id": 2,
+      "description": "\"We accomplished something!\""
+    },
+    {
+      "name": "Refactoring",
+      "id": 3,
+      "description": "Martin Fowler's classic book on refactoring code."
+    },
+    {
+      "name": "Domain-driven Design",
+      "id": 4,
+      "description": "Explains how to incorporate effective domain modeling into software development."
+    },
+    {
+      "name": "Inferno Girl Red",
+      "id": 5
+    },
+    {
+      "name": "Radiant Black",
+      "id": 6,
+      "description": "Nathan Burnett has just turned thirty, and things aren't great: He's working (and failing) at two jobs, his credit card debt is piling up, and his only move... is moving back home with his parents. See Nathan Burnett become Radiant Black in this new series from Kyle Higgins and Marcelo Costa, the team behind the Eisner Award-nominated series Mighty Morphin Power Rangers."
+    }
+  ]
 }

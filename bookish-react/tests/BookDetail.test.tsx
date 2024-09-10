@@ -1,31 +1,42 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import {screen, fireEvent, render} from "@testing-library/react";
 import {describe, expect, test} from '@jest/globals';
 
 import BookDetail from "@/app/ui/components/BookDetail/BookDetail";
-import {MAX_DESCRIPTION_LENGTH_CHARACTERS} from "@/app/ui/utils/BookUtils";
+import customRender from "./testUtilities/customRender";
+import {MAX_DESCRIPTION_LENGTH_DEFAULT} from "@/app/ui/utils/BookUtils";
 
 describe('BookDetail', () => {
-
   const book = {
     name: 'Transformers: More Than Meets the Eye Volume 1',
     id: '1',
     description: "The gayest of the robots in disguise."
   };
-  const longDescription = "a".repeat(MAX_DESCRIPTION_LENGTH_CHARACTERS + 1);
+  const longDescription = "a".repeat(MAX_DESCRIPTION_LENGTH_DEFAULT + 1);
   const bookWithLongDescription = {
     ...book,
     description: longDescription
-  }
+  };
+  const sampleReview = {
+    id: 1,
+    bookId: "1",
+    name: "Ultra Magnus",
+    date: "2024/09/09",
+    content: "Hmm. Grammar was a bit off, but not worthy of avoiding."
+  };
+  const bookWithReview = {
+    ...book,
+    reviews: [sampleReview]
+  };
 
   it('Renders with the correct title in the heading', async () => {
-    render(<BookDetail book={book} />);
+    customRender(<BookDetail book={book} />);
     const heading = screen.getByRole('heading');
     expect(heading.innerHTML).toEqual(book.name);
   });
 
   it('Renders with the correct description', async () => {
-    render(<BookDetail book={book} />);
+    customRender(<BookDetail book={book} />);
 
     const description = screen.getByText(book.description);
     expect(description).toBeInTheDocument();
@@ -36,14 +47,14 @@ describe('BookDetail', () => {
       ...book,
       description: undefined
     };
-    render(<BookDetail book={bookWithoutDescription} />);
+    customRender(<BookDetail book={bookWithoutDescription} />);
 
     const description = screen.getByTestId('book-description');
     expect(description.innerHTML).toEqual(bookWithoutDescription.name);
   });
 
   it('Renders an empty description for an undefined book', () => {
-    render(<BookDetail book={undefined} />);
+    customRender(<BookDetail book={undefined} />);
 
     const description = screen.getByTestId('book-description');
     expect(description.innerHTML).toEqual("");
@@ -51,19 +62,36 @@ describe('BookDetail', () => {
 
   it('Shows a "show more" link when the description is too long', () => {
     // BookUtils contains the MAX_DESCRIPTION_LENGTH constant
-    render(<BookDetail book={bookWithLongDescription} />);
+    customRender(<BookDetail book={bookWithLongDescription} />);
     const description = screen.getByTestId('book-description');
-    expect(description.innerHTML).toEqual(`${longDescription.slice(0, MAX_DESCRIPTION_LENGTH_CHARACTERS)}...`);
+    expect(description.innerHTML).toEqual(`${longDescription.slice(0, MAX_DESCRIPTION_LENGTH_DEFAULT)}...`);
     const showMoreButton = screen.getByTestId('description-expansion');
     expect(showMoreButton).toBeInTheDocument();
   });
 
   it('Shows the full description when the "show more" link is clicked', () => {
-    render(<BookDetail book={bookWithLongDescription} />);
+    customRender(<BookDetail book={bookWithLongDescription} />);
     const showMoreButton = screen.getByTestId('description-expansion');
     fireEvent.click(showMoreButton);
     const description = screen.getByTestId('book-description');
     expect(description.innerHTML).toEqual(longDescription);
+  });
+
+  it("renders reviews when provided", () => {
+    customRender(<BookDetail book={bookWithReview} />);
+    const reviews = screen.getAllByTestId("review");
+    expect(reviews.length).toBe(bookWithReview.reviews.length);
+    expect(reviews[0].innerHTML).toEqual(bookWithReview.reviews[0].content);
+  });
+
+  it("renders a review form", () => {
+    customRender(<BookDetail book={book} />);
+    const nameInput = screen.getByTestId("review-form-name");
+    const contentInput = screen.getByTestId("review-form-content");
+    const submitButton = screen.getByTestId("review-form-submit");
+    expect(nameInput).toBeInTheDocument();
+    expect(contentInput).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
   });
 
 });
